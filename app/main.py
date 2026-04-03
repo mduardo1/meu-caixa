@@ -1,5 +1,16 @@
-def main():
-    print("Sistema Meu Caixa Financeiro iniciado")
+from flask import Flask
+
+
+def create_app():
+    app = Flask(__name__)
+
+    @app.route("/")
+    def home():
+        return {"message": "Meu Caixa Financeiro rodando"}
+
+    return app
+
 
 if __name__ == "__main__":
-    main()
+    app = create_app()
+    app.run(debug=True)
