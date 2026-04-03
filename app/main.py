@@ -1,4 +1,5 @@
 from flask import Flask
+from app.routes.auth_routes import auth_bp
 
 
 def create_app():
@@ -7,6 +8,9 @@ def create_app():
     @app.route("/")
     def home():
         return {"message": "Meu Caixa Financeiro rodando"}
+
+    # Register auth routes
+    app.register_blueprint(auth_bp)
 
     return app
 
