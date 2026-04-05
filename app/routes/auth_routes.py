@@ -1,15 +1,25 @@
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, request
+from app.services.auth_service import AuthService
 
-auth_bp = Blueprint('auth', __name__)
+auth_bp = Blueprint("auth", __name__)
+auth_service = AuthService()
 
-@auth_bp.route('/login', methods=['POST'])
+
+@auth_bp.route("/register", methods=["POST"])
+def register():
+    data = request.get_json()
+
+    email = data.get("email")
+    password = data.get("password")
+
+    return auth_service.register_user(email, password)
+
+
+@auth_bp.route("/login", methods=["POST"])
 def login():
     data = request.get_json()
 
-    email = data.get('email')
-    password = data.get('password')
+    email = data.get("email")
+    password = data.get("password")
 
-    if email == "admin@email.com" and password == "123456":
-        return jsonify({"message": "Login realizado com sucesso"}), 200
-
-    return jsonify({"message": "Credenciais inválidas"}), 401
+    return auth_service.login_user(email, password)
