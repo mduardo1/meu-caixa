@@ -1,4 +1,4 @@
-# Meu Caixa Financeiro
+# meu-caixa-financeiro
 
 Sistema financeiro pessoal com autenticação, controle de entradas e gastos, dashboard e exportação.
 
