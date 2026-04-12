@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Meu Caixa</title>
+
+<style>
+body {
+    font-family: Arial;
+    background: #121212;
+    color: white;
+    text-align: center;
+    margin-top: 100px;
+}
+
+input {
+    padding: 10px;
+    margin: 5px;
+    width: 250px;
+    border-radius: 5px;
+    border: none;
+}
+
+button {
+    padding: 10px 20px;
+    background: #00c853;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #00a844;
+}
+</style>
+
+</head>
+<body>
+
+<h1>💰 Meu Caixa Financeiro</h1>
+
+<input type="email" id="email" placeholder="Email"><br>
+<input type="password" id="password" placeholder="Senha"><br><br>
+
+<button onclick="login()">Entrar</button>
+
+<br><br>
+
+<button onclick="register()">Cadastrar</button>
+
+<p id="resultado"></p>
+
+<script>
+async function login() {
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+
+    const response = await fetch("http://127.0.0.1:5000/login", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ email, password })
+    });
+
+    const data = await response.json();
+    document.getElementById("resultado").innerText = data.message;
+}
+
+async function register() {
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+
+    const response = await fetch("http://127.0.0.1:5000/register", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ email, password })
+    });
+
+    const data = await response.json();
+    document.getElementById("resultado").innerText = data.message;
+}
+</script>
+
+</body>
+</html>
